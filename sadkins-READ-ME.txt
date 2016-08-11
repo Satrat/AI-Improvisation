@@ -1,0 +1,112 @@
+*****READ-ME*****
+
+L-System Improvisation Using Viola Pitch Detection
+15-323 Final Project Spring 2016
+Sara Adkins(sadkins)
+
+
+**Installing the fiddle~ External**
+
+In order to utilize the pitch detection aspect of this project, you will need 
+the files fiddle~.mxe and fiddle~.help that are included in the fiddle~ 
+directory. Note that for this external to function, you must run the project in 
+Max 7 32-bit mode. Copy the file fiddle~.mxe and paste it into the 
+resouces/externals/msp folder of Max 7. Copy the file fiddle~.help into the 
+resources/help/msp folder. Upon restarting Max 7, fiddle~ should now be 
+recognized as an object.
+
+
+**Running the Program**
+
+Once you have installed the fiddle~ external, open ViolaProject.maxpat to use 
+the program. Ensure that your preferred audio input and output devices are set 
+under the Options -> Audio Status menu. Once this is set up correctly, you can 
+lock the patch and click on the blue buttons to begin detecting pitch and 
+playing the L-system harmony. Be sure to djust the gain sliders in the main 
+patch and in the sinusoid subpatches to your preferred levels. Note that when 
+the gain sliders in the main patch are at zero, you will hear no audio.
+
+
+**Using the Program**
+
+Once the program is running, you can begin playing the viola. As long as your 
+pitches are below C4, the L-system will play notes in the key of E-major, and 
+you will hear the sinusoid drone playing a low E. To keep in key with the 
+harmonies, it is recommended that you play notes primarily in the key of 
+E-major, and add chromaticism as you see fit. When you play pitches from C4 to 
+C5(not inclusive) the program will switch to a new L-system, where the rules 
+contain notes in the key on A minor, and the drone sinusoid is a low A. Pitches 
+C5 and above will invoke an L-system in the key of C major, with a low C drone 
+sinusoid. Note that when you are not playing, the program will default to the E 
+major L-system and sinusoid.
+
+These three keys were chosen because they relate to each other in a minor 
+tonic(A), dominant(E) and relative major(C) relationship. This is helpful to 
+keep in mind as you think about how to effectively split up an improvization 
+into sections. Though the sections are separated by the pitch class C, you may 
+find it pleasing to begin new sections on the tonic of each key. For instance, 
+jumping up to an A4 when you transition from the E-major section to the A-minor 
+section to establish a strong sense of tonic. Also experiment with transitioning
+on notes that are common to both keys, such as the C5(which is a member of the 
+A minor and the C major scale), when jumping from the A minor section to the C 
+major section. Also, when deciding when to switch to a different section, be 
+sure to listen to the L-system for a transition time in the counter melody 
+that you feel will be natural.
+
+
+**L-system Grammar Details**
+Grammars were kept to short rules so that each L-system has the opportunity to 
+span out to many levels during the course of an improvisation so that 
+interesting patterns may be formed. Each L-system is intentionally running 
+continuosly throughout the piece(even though only one is ever playing notes 
+at any given time, they are all always generating notes) so that as the piece 
+progresses all of the L-systems become more and more dense and "fanned out".
+
+E-major(Triggered by pitches below C4)
+Axiom(First played sequence): E, F#
+Grammar Rules:
+E -> F#, G#
+F# -> G#, B
+G# -> E, F#
+A -> B, G#
+B -> A, E
+
+A-minor(Triggered by pitches between C4 and C5)
+Axiom: E, A
+Grammar Rules:
+A -> B, C
+B -> E, A
+C -> B, A
+D -> E, F
+E -> D, C
+F -> A, E
+
+C-major(Triggered by pitches C5 and above)
+Axiom: C, E
+Grammar Rules:
+C -> D, G
+D -> C, E
+E -> D, F
+F -> G, E
+G -> D, C
+
+
+**FM Synthesis of Generated Tones**
+Then sinusoidal drones that play the tonic of each section are each made up of 
+4 sinusoids: the fundamental frequency and the first 3 harmonics in the harmonic
+series. The user is able to adjust the level of each of these sinusoids to 
+create a timbre that is to their liking. A varying frequency modulation(the 
+modulation index oscillates between 20 and 100Hz) is then applied to each 
+sinusoid to create a "pulsating" effect in the drone.
+
+The notes played from the L-system are simple sinusoids that are modulated by a 
+low index of modulation to create a vibrato effect. Each note is then multiplied
+by an envelope to create a staccato sound for the L-system harmony.
+
+
+
+
+
+
+
+
